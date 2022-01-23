@@ -8,8 +8,19 @@
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage",
+    "lint": "eslint",
+    "lint-fix": "npm run lint -- --fix",
     "start": "ts-node src/index.ts",
     "build": "tsc"
+  },
+  "lint-staged": {
+    "*.ts": "npm run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
   },
   "dependencies": {
     "@types/jest": "^27.4.0",
