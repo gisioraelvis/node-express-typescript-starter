@@ -1,1 +1,6 @@
-export const sum: Function = (a: number, b: number): number => a + b;
+import { App } from "./app";
+import * as dotenv from "dotenv";
+
+dotenv.config();
+const app: App = new App();
+app.startServer();
