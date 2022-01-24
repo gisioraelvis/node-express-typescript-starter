@@ -12,6 +12,9 @@ router.use("/users", usersRouter);
   our users.router.ts and map it to '/accounts'.
 
   router.use('/accounts', accountsRouter);
+
+  This way, we can add multiple endpoints to our application.
+
 */
 
 export const appRouter: Router = router;

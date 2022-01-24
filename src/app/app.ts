@@ -2,11 +2,10 @@ import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import colors from "colors";
-import morgan from "morgan";
 import helmet from "helmet";
 
+import { Logger } from "./utils/logger";
 import { appRouter } from "./routes";
-import { format } from "path/posix";
 
 export class App {
   private _server: Application;
@@ -19,13 +18,11 @@ export class App {
     this._server.use(bodyParser.urlencoded({ extended: true }));
     this._server.use(cors());
     this._server.use(helmet());
+    this._server.use(Logger);
     this._server.use(appRouter);
   }
 
   public startServer(): void {
-    if (process.env.NODE_ENV === "dev") {
-      this._server.use(morgan<any>("tiny"));
-    }
     const host: string = this._server.get("host");
     const port: number = this._server.get("port");
     this._server.listen(port, host, () => {
