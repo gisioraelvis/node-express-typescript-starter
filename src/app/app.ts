@@ -1,10 +1,9 @@
 import express, { Application } from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import colors from "colors";
 import helmet from "helmet";
 
-import { Logger } from "./utils/logger";
+import { CreateLog, Logger } from "./utils/logger";
 import { appRouter } from "./routes";
 
 export class App {
@@ -26,9 +25,7 @@ export class App {
     const host: string = this._server.get("host");
     const port: number = this._server.get("port");
     this._server.listen(port, host, () => {
-      console.log(
-        colors.yellow.bold(`Server started at http://${host}:${port}`),
-      );
+      CreateLog.info(`Server started at http://${host}:${port}`);
     });
   }
 }
