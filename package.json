@@ -10,9 +10,11 @@
     "coverage": "jest --coverage",
     "lint": "eslint",
     "lint-fix": "npm run lint -- --fix",
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "start:dev": "ts-node-dev src/index.ts",
-    "build": "tsc",
+    "migrations:gen": "ts-node ./node_modules/.bin/typeorm migration:generate",
+    "migrations:run": "ts-node ./node_modules/.bin/typeorm migration:run",
     "prepare": "husky install"
   },
   "lint-staged": {
