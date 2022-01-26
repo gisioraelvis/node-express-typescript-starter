@@ -1,22 +1,25 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../models";
+import { User } from "../data";
+import { IRepository, UsersRepository } from "../repositories";
+import { UsersService } from "../services";
+
+const usersRepository: IRepository<User> = new UsersRepository();
+const usersService: UsersService = new UsersService(usersRepository);
 
 export class UsersController {
-  private readonly users: User[];
-
-  constructor() {
-    this.users = [
-      new User("jmw5598", "Jason", "White"),
-      new User("djt2020", "Daniel", "Townswell"),
-      new User("dlw3512", "Danielle", "Whitmore"),
-    ];
-  }
-
-  public async getAllUsers(
+  public getByUsername = async (
     req: Request,
     res: Response,
     next: NextFunction,
-  ): Promise<any> {
-    return res.status(200).json(this.users);
-  }
+  ): Promise<any> => {
+    await usersService.getByUsername(req, res, next);
+  };
+
+  public getAllUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<any> => {
+    await usersService.getAllUsers(req, res, next);
+  };
 }

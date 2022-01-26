@@ -13,8 +13,8 @@
     "build": "tsc",
     "start": "ts-node src/index.ts",
     "start:dev": "ts-node-dev src/index.ts",
-    "migrations:gen": "ts-node ./node_modules/.bin/typeorm migration:generate",
-    "migrations:run": "ts-node ./node_modules/.bin/typeorm migration:run",
+    "migration:gen": "ts-node ./node_modules/.bin/typeorm migration:generate",
+    "migration:run": "ts-node ./node_modules/.bin/typeorm migration:run",
     "prepare": "husky install"
   },
   "lint-staged": {

@@ -1,13 +1,10 @@
-import express, { Request, Response, Router, NextFunction } from "express";
+import express, { Router } from "express";
 import { UsersController } from "../controllers";
-// import { IRepository, UsersRepository } from "../repositories";
-// import { User } from "../data";
 
 const router: Router = express.Router();
 const usersController: UsersController = new UsersController();
 
-router.get("/", async (req: Request, res: Response, next: NextFunction) => {
-  await usersController.getAllUsers(req, res, next);
-});
+router.get("/", usersController.getAllUsers);
+router.get("/:username", usersController.getByUsername);
 
 export const usersRouter: Router = router;
