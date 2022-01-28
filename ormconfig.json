@@ -3,12 +3,12 @@
   "database": "database.sqlite",
   "synchronize": true,
   "logging": false,
-  "entities": ["src/app/data/entities/**/*.entity.ts"],
-  "migrations": ["src/app/data/migrations/**/*.ts"],
-  "subscribers": ["src/app/data/subscribers/**/*.subscriber.ts"],
+  "entities": ["src/app/db/entities/**/*.entity.ts"],
+  "migrations": ["src/app/db/migrations/**/*.ts"],
+  "subscribers": ["src/app/db/subscribers/**/*.subscriber.ts"],
   "cli": {
-    "entitiesDir": "src/app/data/entities",
-    "migrationsDir": "src/app/data/migrations",
-    "subscribersDir": "src/app/data/subscribers"
+    "entitiesDir": "src/app/db/entities",
+    "migrationsDir": "src/app/db/migrations",
+    "subscribersDir": "src/app/db/subscribers"
   }
 }

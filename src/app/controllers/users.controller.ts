@@ -1,12 +1,27 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../data";
-import { IRepository, UsersRepository } from "../repositories";
+import { UsersRepository } from "../repositories";
 import { UsersService } from "../services";
 
-const usersRepository: IRepository<User> = new UsersRepository();
+const usersRepository: UsersRepository = new UsersRepository();
 const usersService: UsersService = new UsersService(usersRepository);
 
 export class UsersController {
+  public registerUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<any> => {
+    return await usersService.registerUser(req, res, next);
+  };
+
+  public loginUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<any> => {
+    return await usersService.loginUser(req, res, next);
+  };
+
   public getByUsername = async (
     req: Request,
     res: Response,
