@@ -1,8 +1,8 @@
 import { Column, Entity } from "typeorm";
-import { BaseEntity } from "./base.entity";
+import { SharedEntity } from "./shared.entity";
 
 @Entity()
-export class User extends BaseEntity {
+export class User extends SharedEntity {
   @Column({ unique: true })
   public username: string;
 

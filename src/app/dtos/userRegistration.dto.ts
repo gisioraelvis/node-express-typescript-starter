@@ -7,7 +7,7 @@ export class UserRegistrationDto {
   public firstname: string;
   @IsString()
   public lastname: string;
-  @IsEmail()
+  @IsEmail({}, { message: "$value is not a valid $target" })
   public email: string;
   @Matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, {
     message:

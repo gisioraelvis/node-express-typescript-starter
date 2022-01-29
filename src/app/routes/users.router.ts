@@ -1,18 +1,43 @@
-import express, { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { UsersController } from "../controllers";
 import { dtoValidationMiddleware } from "../middlewares";
-import { UserRegistrationDto } from "../dtos";
+import { UserLoginDto, UserRegistrationDto } from "../dtos";
+import { UsersRepository } from "../repositories";
+import { authenticationMiddleware } from "../middlewares";
 
-const router: Router = express.Router();
-const usersController: UsersController = new UsersController();
+const router: Router = Router();
+const usersRepository: UsersRepository = new UsersRepository();
+const usersController: UsersController = new UsersController(usersRepository);
 
-router.get("/", usersController.getAllUsers);
-router.get("/:username", usersController.getByUsername);
+router.get("/", async (req: Request, res: Response, next: NextFunction) => {
+  await usersController.getAllUsers(req, res, next);
+});
+
 router.post(
-  "/register",
+  "/signup",
   dtoValidationMiddleware(UserRegistrationDto),
-  usersController.registerUser,
+  async (req: Request, res: Response, next: NextFunction) => {
+    await usersController.registerUser(req, res, next);
+  },
 );
-router.post("/login", usersController.loginUser);
+
+router.post(
+  "/login",
+  dtoValidationMiddleware(UserLoginDto),
+  async (req: Request, res: Response, next: NextFunction) => {
+    await usersController.loginUser(req, res, next);
+  },
+);
+
+router.post(
+  "/updateprofile",
+  dtoValidationMiddleware(UserRegistrationDto),
+  async (req: Request, res: Response, next: NextFunction) => {
+    await authenticationMiddleware(req, res, next);
+  },
+  async (req: Request, res: Response, next: NextFunction) => {
+    await usersController.updateUser(req, res, next);
+  },
+);
 
 export const usersRouter: Router = router;
