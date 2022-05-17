@@ -22,7 +22,7 @@ router.post(
 );
 
 router.post(
-  "/login",
+  "/signin",
   dtoValidationMiddleware(UserLoginDto),
   async (req: Request, res: Response, next: NextFunction) => {
     await usersController.loginUser(req, res, next);
